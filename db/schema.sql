@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS pokemonDB
+DROP DATABASE IF EXISTS pokemonDB;
 CREATE DATABASE pokemonDB;
 
 USE pokemonDB;
@@ -10,9 +10,10 @@ CREATE TABLE pokemon (
   type_two INT NULL
 );
 
-CREATE types (
+CREATE TABLE types (
   id INT NOT NULL PRIMARY KEY,
-  type_name 
-)
+  type_name VARCHAR(100)
+);
 
 SELECT * FROM pokemon;
+SELECT * FROM types;
