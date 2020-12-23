@@ -53,3 +53,24 @@ LEFT JOIN t2 ON
 - `t1` is the name of the table that will have things joined to it or the main table is how I think of it. All of the data from this table will be shown.
 - `t2` is the name of the table you want to join to the main table. Only the data that matches from this table will be shown.
 - `join_condition` is a conditional statement to show what parts of t2 need to match t1 for them to be shown.
+
+Below is an example of a LEFT JOIN.
+
+- `selected_list` is the columns id and poke_name for the pokemon table and the column type_name from the table pokemon_types.
+- `t1` is a table called `pokemon`.
+- `t2` is a table called `pokemon_types`.
+- `join_condition` is when a pokemon's type one (which is type INT) matches a type's id, then include the data from pokemon_types.
+
+```<
+SELECT
+    pokemon.id
+    pokemon.poke_name,
+    pokemon_types.type_name
+FROM
+    pokemon
+LEFT JOIN poke_types ON
+    pokemon.type_one = pokemon_types.id;
+
+```
+
+Because we specified that we want the columns id and poke_name from the pokemon table and type_name column from the pokemon_types table, we only see these columns displayed. The pokemon table rows are in their normal order and are all present. The type_name column from pokemon_types appears with the value that matches the pokemon in that row. The pokemon table is the main table or the left table and the pokemon_types is the right table.
