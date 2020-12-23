@@ -19,16 +19,15 @@ function runPokedex() {
       name: "test",
       type: "rawlist",
       message: "Welcome to the Pokedex App!",
-      choices: ["View all types", "test 2", "exit"],
+      choices: ["View types table", "View pokemon table", "exit"],
     })
     .then(function (answer) {
       switch (answer.test) {
-        case "View all types":
-          viewAllTypes();
+        case "View types table":
+          viewTypesTable();
           break;
-        case "test 2":
-          console.log("You chose Test 2");
-          runPokedex();
+        case "View pokemon table":
+          viewPokemonTable();
           break;
         case "exit":
           // ends connection to mysql server.
@@ -46,18 +45,29 @@ function runPokedex() {
     });
 }
 
-function viewAllTypes() {
+function viewTypesTable() {
   // You could put the query inside the connection.query() call, but it makes it a little cleaner this way.
   let query = "SELECT * FROM types";
   connection.query(query, function (err, res) {
     // handle outcome where an error has occurred.
     if (err) throw err;
-    // element is a parameter name chosen by me
-    // -- when using the method forEach, you have a callback function that gets one indice from the array, ...
-    //   ... in this case 'res' at a time. We are using the name "element" for indice.
-    //   One element from from the array is passed in each time.
     res.forEach((element) => {
       console.log(`Type ID: ${element.id} Name: ${element.type_name}`);
+    });
+    runPokedex();
+  });
+}
+
+function viewPokemonTable() {
+  // You could put the query inside the connection.query() call, but it makes it a little cleaner this way.
+  let query = "SELECT * FROM pokemon";
+  connection.query(query, function (err, res) {
+    // handle outcome where an error has occurred.
+    if (err) throw err;
+    res.forEach((element) => {
+      console.log(
+        `Pokedex #: ${element.id} Name: ${element.poke_name} Type 1: ${element.type_one} Type 2: ${element.type_two}`
+      );
     });
     runPokedex();
   });
