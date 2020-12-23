@@ -6,7 +6,10 @@ let inquirer = require("inquirer");
 // -- Connection was imported from ./db/connection
 // -- You only want one connection running, do not start a connection multiple times.
 connection.connect(function (err) {
+  // handle outcome where an error occurs.
   if (err) throw err;
+  // call the function runPokedex once the connection begins.
+  // -- runPokedex starts my questions to the user using inquirer
   runPokedex();
 });
 
@@ -42,4 +45,13 @@ function runPokedex() {
           break;
       }
     });
+}
+
+function viewAllTypes() {
+  let query = "SELECT * FROM pokemon";
+  connection.query(query, function (err, res) {
+    // handle outcome where an error has occurred.
+    if (err) throw err;
+  });
+  console.log();
 }
