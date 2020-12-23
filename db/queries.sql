@@ -1,7 +1,16 @@
--- I created this file while testing my queries.
--- I find it easier to test the queries in MySQL Workbench first. Then add them to my code.
-
 USE pokemondb;
+
+SELECT
+	pokemon.id,
+    pokemon.poke_name,
+    pokemon_types.type_name
+FROM
+	pokemon
+LEFT JOIN
+	pokemon_types
+ON
+	pokemon.type_one = pokemon_types.id
+;
 
 SELECT 
 	pokemon.id,

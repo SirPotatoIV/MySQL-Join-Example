@@ -1,4 +1,4 @@
-let mysql = require("mysql");
+// Connection was created in ./db/connection and is being imported into this file.
 let { connection } = require("./db/connection");
 let inquirer = require("inquirer");
 
@@ -10,7 +10,7 @@ connection.connect(function (err) {
   if (err) throw err;
   console.log("\n Welcome to PokeView! \n");
   // call the function runPokeView once the connection begins.
-  // -- runPokeView starts my questions to the user using inquirer
+  // -- runPokeView starts my questions to the user using inquirer.
   runPokeView();
 });
 
@@ -59,7 +59,7 @@ function runPokeView() {
 }
 
 function viewTypesTable() {
-  // You could put the query inside the connection.query() call, but it makes it a little cleaner this way.
+  // you could put the query inside the connection.query() call, but it makes it a little cleaner this way.
   let query = "SELECT * FROM pokemon_types";
   connection.query(query, function (err, res) {
     // handle outcome where an error has occurred.
@@ -75,7 +75,7 @@ function viewTypesTable() {
 }
 
 function viewPokemonTable() {
-  // You could put the query inside the connection.query() call, but it makes it a little cleaner this way.
+  // you could put the query inside the connection.query() call, but it makes it a little cleaner this way.
   let query = "SELECT * FROM pokemon";
   connection.query(query, function (err, res) {
     // handle outcome where an error has occurred.
@@ -93,8 +93,21 @@ function viewPokemonTable() {
 }
 
 function viewPokemonPrimaryType() {
-  console.log("Pokemon with primary type listed");
-  runPokeView();
+  let query =
+    "SELECT pokemon.id, pokemon.poke_name, pokemon_types.type_name FROM pokemon LEFT JOIN pokemon_types ON  pokemon.type_one = pokemon_types.id;";
+  connection.query(query, function (err, res) {
+    // handle outcome where an error has occurred.
+    if (err) throw err;
+    // makes a new line so console output is cleaner
+    console.log("");
+    res.forEach((element) => {
+      console.log(
+        `Pokedex #: ${element.id} Name: ${element.poke_name} Type: ${element.type_name}`
+      );
+    });
+    console.log("");
+    runPokeView();
+  });
 }
 
 function viewPokemonPrimarySecondaryType() {
@@ -107,11 +120,10 @@ function viewPokemonPrimarySecondaryType() {
     console.log("");
     res.forEach((element) => {
       console.log(
-        `Pokedex #: ${element.id} Name: ${element.poke_name} Type 1: ${element.primary_type} Type 2: ${element.secondary_type}`
+        `Pokedex #: ${element.id} Name: ${element.poke_name} Primary Type: ${element.primary_type} Secondary Type: ${element.secondary_type}`
       );
     });
     console.log("");
     runPokeView();
   });
-  runPokeView();
 }
