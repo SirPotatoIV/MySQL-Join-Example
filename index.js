@@ -23,7 +23,8 @@ function runPokeView() {
       choices: [
         "View types table",
         "View pokemon table",
-        "View pokemon and types joined (Pokedex kinda?)",
+        "View pokemon and primary type (basic join)",
+        "View pokemon and both primary and secondary type (double join)",
         "exit",
       ],
     })
@@ -35,8 +36,11 @@ function runPokeView() {
         case "View pokemon table":
           viewPokemonTable();
           break;
-        case "View pokemon and types joined (Pokedex kinda?)":
-          viewPokedex();
+        case "View pokemon and primary type (basic join)":
+          viewPokemonPrimaryType();
+          break;
+        case "View pokemon and both primary and secondary type (double join)":
+          viewPokemonPrimarySecondaryType();
           break;
         case "exit":
           // ends connection to mysql server.
@@ -88,7 +92,12 @@ function viewPokemonTable() {
   });
 }
 
-function viewPokedex() {
+function viewPokemonPrimaryType() {
+  console.log("Pokemon with primary type listed");
+  runPokeView();
+}
+
+function viewPokemonPrimarySecondaryType() {
   let query =
     "SELECT pokemon.id, pokemon.poke_name, type_1.type_name AS primary_type, type_2.type_name AS secondary_type FROM pokemon LEFT JOIN pokemon_types AS type_1 ON  pokemon.type_one = type_1.id LEFT JOIN pokemon_types AS type_2 ON pokemon.type_two = type_2.id;";
   connection.query(query, function (err, res) {
