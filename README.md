@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The purpose of this repository is to demo how to perform a LEFT JOIN utilizing the `node` and the node module `mysql`.
+The purpose of this repository is to demo how to perform a LEFT JOIN utilizing `Node.js` and the node module `mysql`.
 
 ## Table of Contents
 
