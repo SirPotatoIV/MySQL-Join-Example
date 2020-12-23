@@ -13,7 +13,7 @@ INSERT INTO pokemon
   ('Wartortle', 3, NULL),
   ('Blastoise', 3, NULL);
 
-INSERT INTO types
+INSERT INTO pokemon_types
   (type_name)
   VALUES
   ('Grass'),

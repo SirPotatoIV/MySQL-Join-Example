@@ -10,10 +10,10 @@ CREATE TABLE pokemon (
   type_two INT NULL
 );
 
-CREATE TABLE types (
+CREATE TABLE pokemon_types (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   type_name VARCHAR(100)
 );
 
 SELECT * FROM pokemon;
-SELECT * FROM types;
+SELECT * FROM pokemon_types;
