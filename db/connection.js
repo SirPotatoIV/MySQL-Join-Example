@@ -7,3 +7,5 @@ let connection = mysql.createConnection({
   password: "root",
   database: "pokemonDB",
 });
+
+module.exports = { connection };
