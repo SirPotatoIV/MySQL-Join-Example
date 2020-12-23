@@ -59,11 +59,14 @@ Below is an example of a LEFT JOIN.
 - `selected_list` is the columns id and poke_name for the pokemon table and the column type_name from the table pokemon_types.
 - `t1` is a table called `pokemon`.
 - `t2` is a table called `pokemon_types`.
-- `join_condition` is when a pokemon's type one (which is type INT) matches a type's id, then include the data from pokemon_types.
+- `join_condition` is when a pokemon's type_one matches a type's id, then include the data from pokemon_types.
+  - i.e. There is a pokemon named charmander who's type_one is 2. There is a pokemon_type with id 2 and the type_name fire. The row that contains Charmander would show `id: 4, poke_name: "Charmander", type_name: "Fire"`.
+- NOTE: To refer to a column in a table you use the syntax `table_name.column_name`.
+  - Example: There is a table named pokemon and it has a column called poke_name. To refer to this column you would use `pokemon.poke_name`.
 
 ```<
 SELECT
-    pokemon.id
+    pokemon.id,
     pokemon.poke_name,
     pokemon_types.type_name
 FROM
