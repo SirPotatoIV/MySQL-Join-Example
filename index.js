@@ -110,9 +110,12 @@ function viewPokemonPrimaryType() {
   });
 }
 
+// This one is a little funkier because I am left joining the same table twice.
+// -- A pokemon can have two types, so to view both types, I have to join the pokemon_types table to the pokmeon table twice.
+// -- To do this you have to create aliases (another name) for the table you are joining to twice, in this case pokemon_types. The aliases are types_one and types_two.
 function viewPokemonPrimarySecondaryType() {
   let query =
-    "SELECT pokemon.id, pokemon.poke_name, type_1.type_name AS primary_type, type_2.type_name AS secondary_type FROM pokemon LEFT JOIN pokemon_types AS type_1 ON  pokemon.type_one = type_1.id LEFT JOIN pokemon_types AS type_2 ON pokemon.type_two = type_2.id;";
+    "SELECT pokemon.id, pokemon.poke_name, types_one.type_name AS primary_type, types_two.type_name AS secondary_type FROM pokemon LEFT JOIN pokemon_types AS types_one ON  pokemon.type_one = types_one.id LEFT JOIN pokemon_types AS types_two ON pokemon.type_two = types_two.id;";
   connection.query(query, function (err, res) {
     // handle outcome where an error has occurred.
     if (err) throw err;
