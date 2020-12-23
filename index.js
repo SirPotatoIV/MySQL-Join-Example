@@ -8,18 +8,23 @@ let inquirer = require("inquirer");
 connection.connect(function (err) {
   // handle outcome where an error occurs.
   if (err) throw err;
-  // call the function runPokedex once the connection begins.
-  // -- runPokedex starts my questions to the user using inquirer
-  runPokedex();
+  // call the function runPokeView once the connection begins.
+  // -- runPokeView starts my questions to the user using inquirer
+  runPokeView();
 });
 
-function runPokedex() {
+function runPokeView() {
   inquirer
     .prompt({
       name: "test",
       type: "rawlist",
-      message: "Welcome to the Pokedex App!",
-      choices: ["View types table", "View pokemon table", "exit"],
+      message: "Welcome to the Pokemon Database!",
+      choices: [
+        "View types table",
+        "View pokemon table",
+        "View Pokedex (kinda)",
+        "exit",
+      ],
     })
     .then(function (answer) {
       switch (answer.test) {
@@ -28,6 +33,9 @@ function runPokedex() {
           break;
         case "View pokemon table":
           viewPokemonTable();
+          break;
+        case "View Pokedex (kinda)":
+          viewPokedex();
           break;
         case "exit":
           // ends connection to mysql server.
@@ -39,7 +47,7 @@ function runPokedex() {
         default:
           // it is basically impossible for this case to happen, but I put it here for best practice.
           console.log("Your choice does not match any options");
-          runPokedex();
+          runPokeView();
           break;
       }
     });
@@ -47,14 +55,14 @@ function runPokedex() {
 
 function viewTypesTable() {
   // You could put the query inside the connection.query() call, but it makes it a little cleaner this way.
-  let query = "SELECT * FROM types";
+  let query = "SELECT * FROM pokemon_types";
   connection.query(query, function (err, res) {
     // handle outcome where an error has occurred.
     if (err) throw err;
     res.forEach((element) => {
       console.log(`Type ID: ${element.id} Name: ${element.type_name}`);
     });
-    runPokedex();
+    runPokeView();
   });
 }
 
@@ -69,6 +77,11 @@ function viewPokemonTable() {
         `Pokedex #: ${element.id} Name: ${element.poke_name} Type 1: ${element.type_one} Type 2: ${element.type_two}`
       );
     });
-    runPokedex();
+    runPokeView();
   });
+}
+
+function viewPokedex() {
+  console.log("Soon to be the Pokedex!");
+  runPokeView();
 }
