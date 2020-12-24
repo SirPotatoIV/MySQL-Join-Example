@@ -21,7 +21,8 @@ The purpose of this repository is to demo how to perform a LEFT JOIN utilizing `
 3. Navigate to repository directory in a terminal
 4. Once within the root directory, install the node modules with `npm i`
 5. Update `./db/connection.js` with your appropriate settings
-6. Run the application by executing the command `node index.js`
+6. Make sure to execute the schema.sql and seed.sql files to create the database and seed it with data.
+7. Run the application by executing the command `node index.js`
 
 ## Sources
 
